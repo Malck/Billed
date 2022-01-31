@@ -9,7 +9,6 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import store from "../__mocks__/store"
 import Bills from "../containers/Bills"
-//import Bills, { handleClickNewBill } from "../containers/Dashboard.js"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import { ROUTES } from "../constants/routes"
 import NewBillUI from "../views/NewBillUI.js"
@@ -87,7 +86,7 @@ describe("Given I am connected as an employee", () => {
         window.localStorage.setItem('user', JSON.stringify({
           type: 'Employee'
         }))
-        $.fn.modal = jest.fn();//regle le probleme de lien avec billscontainers
+        $.fn.modal = jest.fn(); //regle le probleme de lien avec billscontainers//jquery
         const html = BillsUI({ data: bills })
         document.body.innerHTML = html
         const onNavigate = (pathname) => {
@@ -147,9 +146,9 @@ describe("When user click on the button create a new bill", () => {
 //Test d'integration GET
   describe("When I navigate to Bills UI", () => {
     test("fetches bills from mock API GET", async () => {
-      // Spy On The so called store Mock
+      // Spy On store Mock
       const getSpy = jest.spyOn(store, "get");
-      // Values return after store Mock have been called
+      // Values return apres que le store Mock soit appelé 
       const bills = await store.get();
       expect(getSpy).toHaveBeenCalledTimes(1);
       expect(bills.data.length).toBeGreaterThan(1);
@@ -178,21 +177,3 @@ describe("When user click on the button create a new bill", () => {
   });
 
 })
-
-
-
-
-//Test qui ne fonctionne pas 
-/*
-
-test("Then bill icon in vertical layout should be highlighted", () => {
-      const html = BillsUI({ data: []})
-      document.body.innerHTML = html
-      
-      //vérifier si l'icone a bien la classe active-icon
-      //const billIcon = screen.getByTestId("icon-window")
-      //expect(billIcon).toHaveClass('active-icon')
-    })
-//TestingLibraryElementError: Unable to find an element by: [data-testid="icon-window"] 
-
-*/

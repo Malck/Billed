@@ -1,91 +1,20 @@
 /**
  * @jest-environment jsdom
  */
-
+import userEvent from '@testing-library/user-event'
+import store from "../__mocks__/store"
+import Bills from "../containers/Bills"
 
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
-
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 import { fireEvent, screen } from "@testing-library/dom"
-import store from "../__mocks__/store"
-import Bills from "../containers/Bills"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import { ROUTES } from "../constants/routes"
 
 
 
 describe("Given I am connected as an employee", () => {
-/*
-  let onNavigate;
-  let newBill;
-
-    beforeEach(() => {
-      onNavigate = (pathname) => {document.body.innerHTML = ROUTES({ pathname })}
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-      const user = JSON.stringify({
-        type: 'Employee',
-        email: 'test@tock'
-      })
-      window.localStorage.setItem('user', user)
-      document.body.innerHTML = NewBillUI();
-    })
-*/
- /* describe("When I am on a Newbill Page and I submit the form correctly", () => {
-    
-    test("Then I should submit a valid bill", () => {
-      const html = NewBillUI()
-      document.body.innerHTML = html
-
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({ pathname })
-      }
-      const store = null;
-      const newBill = new NewBill({
-        document,
-        onNavigate,
-        store,
-        localStorage: window.localStorage,
-      })
-      const email = JSON.parse(localStorage.getItem("user")).email
-      const jsdomAlert = window.alert;
-      window.alert = () => {};
-      //const type = screen.getByTestId('expense-type')
-      //userEvent.selectOptions(type, [ screen.getByText('Travels') ])
-
-      const name = screen.getByTestId("expense-name")
-      userEvent.type(name, "testa")
-
-      const date = screen.getByTestId('datepicker')
-      userEvent.type(date, '2021-07-19')
-
-      const amount = screen.getByTestId('amount')
-      userEvent.type(amount, '23')
-
-      const pct = screen.getByTestId('pct')
-      userEvent.type(pct, '20')
-
-      const fileUpload = screen.getByTestId('file')
-      const file = new File(['test'], 'test.png', { type: 'image/png' })
-
-      userEvent.upload(fileUpload, file)
-      expect(fileUpload.files).toHaveLength(1)
-
-      //const handleSubmit = jest.fn(newBill.handleSubmit);
-      const handleSubmit = jest.fn((e) => newBill.handleSubmit(e))
-      newBill.fileName = "test.jpg";
-
-      const newBillForm = screen.getByTestId("form-new-bill");
-      newBillForm.addEventListener("submit", handleSubmit);
-
-      fireEvent.click(newBillForm)//fireEvent.submit(newBillForm)
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-
-      window.alert = jsdomAlert;
-    })
-  })
-*/
 
 // TEST SUR handleChangeFile
 
@@ -117,6 +46,7 @@ describe("Given I am connected as an employee", () => {
         store: new StorageMock(),
         localStorage: window.localStorage,
       });
+
       // Mock function handleChangeFile
       const handleChangeFile = jest.fn(() => newBill.handleChangeFile);
 
@@ -141,7 +71,6 @@ describe("Given I am connected as an employee", () => {
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
-        //email: 'test@tld'
       }))
       const html = NewBillUI()
       document.body.innerHTML = html
