@@ -20,14 +20,16 @@ export default class NewBill {
     // format jpg,jpgeg ou png seulement 
     const extensionsAllowed = ["jpg", "jpeg", "png"]; 
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-
+    let filePath = null
+    let fileName = null
     //Enlever le dot = point image.jpg devient imagejpg
     const extensionsCheck = file.name.split(".").pop();
 
     if(extensionsAllowed.includes(extensionsCheck)){
 
-      const filePath = e.target.value.split(/\\/g)
-      const fileName = filePath[filePath.length-1]
+      filePath = e.target.value.split(/\\/g)
+      fileName = filePath[filePath.length-1]
+      
 
       document.getElementById("btn-send-bill").disabled = false;
 
@@ -41,6 +43,7 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
     formData.append('email', email)
+    
 
     this.store
       .bills()
